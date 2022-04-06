@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const UserModel = require("../models/User.model");
+const { requireLogout } = require("../middleware/authentication.js");
 
 /* GET login page */
-router.get("/login", (req, res, next) => {
-    res.json("login");
+router.get("/login", requireLogout, (req, res, next) => {
+    res.json({ message: "hello from login get"});
 });
 
 /* POST login page */
@@ -17,12 +18,12 @@ router.post("/login", async (req, res, next) => {
         if (!passwordCorrect) {
             throw Error("Password incorrect");
         }
-        req.session.currentUser = user;
+        // req.session.currentUser = user;
         console.log(req.session.currentUser, "<<<< current user");
-        res.json("/home");
+        res.json({currentUser, message: "successfully sent currentuser "});
     }
     catch (err) {
-        res.json("login", { error: "Wrong username or password" });
+        res.status(400).json({ error: "Wrong username or password" });
     }
 });
 

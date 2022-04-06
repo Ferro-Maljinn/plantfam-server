@@ -7,7 +7,16 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
-  },
-  "devDependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "mongo-connect": "^0.0.6",
+    "mongoose": "^6.2.10",
+    "morgan": "^1.10.0",
+    "serve-favicon": "^2.5.0"
   }
 }
