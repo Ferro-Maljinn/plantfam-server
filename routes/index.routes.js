@@ -1,8 +1,16 @@
 const router = require("express").Router();
 
-/* GET home page */
+/* GET index page */
 router.get("/", (req, res, next) => {
-  res.render("index");
+  res.json("All good from the index route");
 });
+
+router.use(require("./Login.routes"));
+
+router.use(require("./Signup.routes"));
+
+router.use(require("./Profilepage.routes"));
+
+router.use(require("./plantdetails.routes"));
 
 module.exports = router;
