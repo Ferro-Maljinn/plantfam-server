@@ -21,10 +21,6 @@ const plantSchema = new Schema({
   },
   light: {
     type: String,
-    required: [
-      true,
-      "How often does your plan needs sunlight? often, less, once a day, none?",
-    ],
   },
   watering: {
     type: String,

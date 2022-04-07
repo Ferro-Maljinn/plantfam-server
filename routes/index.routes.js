@@ -11,6 +11,8 @@ router.use(require("./Signup.routes"));
 
 router.use(require("./Profilepage.routes"));
 
+router.use(require("./plantform.routes"));
+
 router.use(require("./plantdetails.routes"));
 
 module.exports = router;
