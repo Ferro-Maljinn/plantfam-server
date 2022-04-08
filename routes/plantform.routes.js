@@ -2,15 +2,14 @@ const router = require("express").Router();
 const PlantModel = require("../models/Plant.model");
 const { requireLogin } = require("../middleware/authentication.js");
 
-router.use(requireLogin);
-
 /* GET plantform page */
-router.get("/plantform", (req, res, next) => {
+router.get("/plantform", requireLogin, (req, res, next) => {
+  console.log(req.session, "session from plantform")
   res.json({ message: "hello from plantform get" });
 });
 
 /* POST plantform page */
-router.post("/plantform", async (req, res, next) => {
+router.post("/plantform", requireLogin, async (req, res, next) => {
 
   console.log(req.body, "this is req body")
   try {

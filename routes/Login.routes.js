@@ -1,10 +1,9 @@
 const router = require("express").Router();
 const UserModel = require("../models/User.model");
-const { requireLogout } = require("../middleware/authentication.js");
 const bcrypt = require("bcrypt");
 
 /* GET login page */
-router.get("/login", requireLogout, (req, res, next) => {
+router.get("/login", (req, res, next) => {
     res.json({ message: "hello from login get"});
 });
 
@@ -14,15 +13,15 @@ router.post("/login", async (req, res, next) => {
         const user = await UserModel.findOne({ name: req.body.name });
         const hashFromDb = user.password;
         console.log(user)
-        const passwordCorrect = await bcrypt.compare(req.body.password, hashFromDb);
+        const passwordCorrect = await bcrypt.compare(req.body.password, hashFromDb); 
         console.log(passwordCorrect ? "Yes" : "No");
 
         if (!passwordCorrect) {
             throw Error("Password incorrect");
         }
-        req.session.currentUser = user;
+        req.session.currentUser = {_id: user._id, name: user.name};
         console.log(req.session, "session")
-        return res.json({user, message: "successfully sent currentuser "});
+        return res.json({user: req.session.currentUser, message: "successfully sent currentuser "});
     }
     catch (err) {
         console.log(err, "error from login")

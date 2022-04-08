@@ -30,8 +30,8 @@ module.exports = (app) => {
   app.use(
     session({
       secret: process.env.SESSION_SECRET,
-      resave: true,
-      saveUninitialized: true,
+      resave: false,
+      saveUninitialized: false,
       cookie: {
         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         secure: process.env.NODE_ENV === "production",
@@ -39,10 +39,13 @@ module.exports = (app) => {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
       },
       store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/plantfam",
+        mongoUrl: MONGO_URI,
         ttl: 24 * 60 * 60,
       })
-    })) 
+    })
+  );
+
+ 
 
   app.use(
     cors({
@@ -62,5 +65,7 @@ module.exports = (app) => {
   app.use(express.static(path.join(__dirname, "..", "public")));
 
   // Handles access to the favicon
-  app.use(favicon(path.join(__dirname, "..", "public", "images", "favicon.ico")));
+  app.use(
+    favicon(path.join(__dirname, "..", "public", "images", "favicon.ico"))
+  );
 };

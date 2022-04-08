@@ -1,10 +1,9 @@
 const router = require("express").Router();
 const UserModel = require("../models/User.model");
 const bcrypt = require("bcrypt");
-const { requireLogout } = require("../middleware/authentication.js");
 
 /* GET signup page */
-router.get("/signup", requireLogout, (req, res, next) => {
+router.get("/signup", (req, res, next) => {
     res.json({ message: "hello from signup get"});
 });
 

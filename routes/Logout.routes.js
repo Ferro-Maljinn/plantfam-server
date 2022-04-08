@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { requireLogin } = require("../middleware/authentication.js");
 
-router.post("/logout", requireLogin, (req, res) => {
+router.post("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) return next(err);
-        console.log('successfully logged out')
+        console.log('successfully logged out', req.session)
         res.json({message: "successfully logged out"});
     });
 });
+
 
 module.exports = router;
