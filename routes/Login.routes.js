@@ -21,10 +21,11 @@ router.post("/login", async (req, res, next) => {
             throw Error("Password incorrect");
         }
         req.session.currentUser = user;
-        console.log(req.session.currentUser, "<<<< current user");
-        res.json({currentUser, message: "successfully sent currentuser "});
+        console.log(req.session, "session")
+        return res.json({user, message: "successfully sent currentuser "});
     }
     catch (err) {
+        console.log(err, "error from login")
         res.status(400).json({ error: "Wrong username or password" });
     }
 });

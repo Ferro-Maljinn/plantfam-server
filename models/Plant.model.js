@@ -17,7 +17,7 @@ const plantSchema = new Schema({
     required: [true, "Please provide the latin name for the plant"],
   },
   height: {
-    type: Number,
+    type: String,
   },
   light: {
     type: String,

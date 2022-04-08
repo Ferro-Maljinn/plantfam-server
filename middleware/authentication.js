@@ -1,5 +1,6 @@
 const requireLogin = (req, res, next) => {
     if(!req.session.currentUser){
+        console.log("need to be logged in")
         res.json("/login")
         return;
     }
@@ -8,6 +9,7 @@ const requireLogin = (req, res, next) => {
 
 const requireLogout = (req, res, next) => {
     if(req.session.currentUser){
+        console.log("need to be logged out")
         res.json("/")
         return;
     }
