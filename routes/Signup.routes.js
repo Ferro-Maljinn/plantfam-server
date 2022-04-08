@@ -9,11 +9,9 @@ router.get("/signup", requireLogout, (req, res, next) => {
 });
 
 router.post("/signup", async (req, res, next) => {
-    console.log(req.body, "<<<")
     console.log(req.session, "session")
     try{
     const {name, email, password} = req.body;
-
     const salt = await bcrypt.genSalt(12);
     const hash = await bcrypt.hash(password, salt);
 
@@ -22,8 +20,9 @@ router.post("/signup", async (req, res, next) => {
         email: email,
         password: hash,
     }
-    await UserModel.create(user);
-    // req.session.currentUser = {name, email};
+    
+    const createdUser = await UserModel.create(user);
+    req.session.currentUser = {name, email};
     res.json({user: {name, email}, message: "successfully sent user"});
     }
     catch(err){

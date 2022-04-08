@@ -1,6 +1,6 @@
 // We reuse this import in order to have access to the `body` property in requests
 const express = require("express");
-// const session = require("express-session");
+const session = require("express-session");
 
 // ℹ️ Responsible for the messages you see in the terminal as requests are coming in
 // https://www.npmjs.com/package/morgan
@@ -27,22 +27,22 @@ const { MONGO_URI } = require("../utils/constants");
 module.exports = (app) => {
   app.set("trust proxy", 1);
 
-  // app.use(
-  //   session({
-  //     secret: process.env.SESSION_SECRET,
-  //     resave: true,
-  //     saveUninitialized: true,
-  //     cookie: {
-  //       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-  //       secure: process.env.NODE_ENV === "production",
-  //       httpOnly: true,
-  //       maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-  //     },
-  //     store: MongoStore.create({
-  //       mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/plantfam",
-  //       ttl: 24 * 60 * 60,
-  //     })
-  //   })) 
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      resave: true,
+      saveUninitialized: true,
+      cookie: {
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+      },
+      store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/plantfam",
+        ttl: 24 * 60 * 60,
+      })
+    })) 
 
   app.use(
     cors({

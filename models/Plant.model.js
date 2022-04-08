@@ -17,14 +17,10 @@ const plantSchema = new Schema({
     required: [true, "Please provide the latin name for the plant"],
   },
   height: {
-    type: Number,
+    type: String,
   },
   light: {
     type: String,
-    required: [
-      true,
-      "How often does your plan needs sunlight? often, less, once a day, none?",
-    ],
   },
   watering: {
     type: String,
