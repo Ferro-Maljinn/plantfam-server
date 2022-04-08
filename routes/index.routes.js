@@ -17,4 +17,6 @@ router.use(require("./plantform.routes"));
 
 router.use(require("./plantdetails.routes"));
 
+router.use(require("./ListPlants.routes"));
+
 module.exports = router;

@@ -9,7 +9,7 @@ router.get("/plantform", requireLogin, (req, res, next) => {
 });
 
 /* POST plantform page */
-router.post("/plantform", requireLogin, async (req, res, next) => {
+router.post("/plantform", async (req, res, next) => {
 
   console.log(req.body, "this is req body")
   try {
