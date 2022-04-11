@@ -22,4 +22,6 @@ router.use(require("./plantdetails.routes"));
 
 router.use(require("./ListPlants.routes"));
 
+router.use(require("./DeletePlants.routes"));
+
 module.exports = router;

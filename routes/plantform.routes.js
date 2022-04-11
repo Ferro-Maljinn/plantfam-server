@@ -2,6 +2,9 @@ const router = require("express").Router();
 const PlantModel = require("../models/Plant.model");
 const { requireLogin } = require("../middleware/authentication.js");
 
+// ********* require fileUploader in order to use it *********
+const fileUploader = require('../config/cloudinary.config');
+
 /* GET plantform page */
 router.get("/plantform", requireLogin, (req, res, next) => {
   console.log(req.session, "session from plantform")
@@ -9,7 +12,7 @@ router.get("/plantform", requireLogin, (req, res, next) => {
 });
 
 /* POST plantform page */
-router.post("/plantform", async (req, res, next) => {
+router.post("/plantform", fileUploader.single('plant-image'), async (req, res, next) => {
 
   console.log(req.body, "this is req body")
   try {
@@ -26,7 +29,7 @@ router.post("/plantform", async (req, res, next) => {
 
 
     const plant = {
-      image: image,
+      image: req.file.path,
       description: description,
       englishName: englishName,
       latinName: latinName,
