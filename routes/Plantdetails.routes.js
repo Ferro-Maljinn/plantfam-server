@@ -1,8 +1,14 @@
 const router = require("express").Router();
+const PlantModel = require("../models/Plant.model");
 
 /* GET home page */
-router.get("/plantdetails", (req, res, next) => {
-  res.json("All good from the plantdetails route");
+router.get("/plantdetails/:plantId", async (req, res, next) => {
+  console.log(req.params)
+
+  const singlePlant = await PlantModel.findById(req.params.plantId)
+  console.log(singlePlant)
+
+  res.status(200).json({singlePlant});
 });
 
 module.exports = router;

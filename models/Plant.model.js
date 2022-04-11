@@ -27,7 +27,8 @@ const plantSchema = new Schema({
   },
   soilType: {
       type: String,
-  }
+  },
+  userId: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 const Plant = model("Plant", plantSchema);
