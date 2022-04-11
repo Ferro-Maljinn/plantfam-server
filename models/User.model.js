@@ -18,6 +18,7 @@ const userSchema = new Schema(
       match: [/^\S+@\S+\.\S+$/, "Please provide a valid email address."],
       lowercase: true,
     },
+    plants: { type: Schema.Types.ObjectId, ref: 'Plant' },
   },
   {
     timestamps: true,
