@@ -11,4 +11,5 @@ router.get("/plantdetails/:plantId", async (req, res, next) => {
   res.status(200).json({singlePlant});
 });
 
+
 module.exports = router;
