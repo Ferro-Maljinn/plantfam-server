@@ -1,9 +1,12 @@
 const router = require("express").Router();
+const PlantModel = require("../models/Plant.model")
 
 /* GET index page */
-router.get("/", (req, res, next) => {
-  res.json("All good from the index route");
-});
+router.get('/', async function(req, res) {
+    let responseFromDB = await PlantModel.find();
+    console.log("response from db", responseFromDB);
+    res.status(200).json(responseFromDB);
+})
 
 router.use(require("./Login.routes"));
 
