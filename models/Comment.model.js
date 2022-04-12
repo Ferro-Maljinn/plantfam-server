@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-let CommentSchema = new mongoose.Schema({
+const CommentSchema = new Schema({
   comment: {
     type: String,
   },
