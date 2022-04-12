@@ -2,6 +2,7 @@ const router = require("express").Router();
 const PlantModel = require("../models/Plant.model");
 
 /* GET updatePlant page */
+
 router.put("/update/plant/:id", async (req, res, next) => {
   console.log("arrived in update plant");
   try {
