@@ -1,12 +1,10 @@
 const router = require("express").Router();
-const PlantModel = require("../models/Plant.model")
+const PlantModel = require("../models/Plant.model");
 
 /* GET index page */
-router.get('/', async function(req, res) {
-    let responseFromDB = await PlantModel.find();
-    console.log("response from db", responseFromDB);
-    res.status(200).json(responseFromDB);
-})
+router.get("/", async function (req, res) {
+    res.sendFile(path.join(__dirname+'/index.html'));
+});
 
 router.use(require("./Login.routes"));
 
