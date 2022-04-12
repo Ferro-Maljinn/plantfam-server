@@ -1,11 +1,17 @@
 const router = require("express").Router();
+const Plant = require("../models/Plant.model");
 const PlantModel = require("../models/Plant.model")
+const UserModel = require("../models/User.model")
 
 /* GET index page */
 router.get('/', async function(req, res) {
-    let responseFromDB = await PlantModel.find();
-    console.log("response from db", responseFromDB);
-    res.status(200).json(responseFromDB);
+    let plantresponseFromDB = await PlantModel.find();
+    let userResponseFromDB = await UserModel.findOne({_id: req.session.currentUser._id})
+    let combinedResponse = {
+        allPlants: plantresponseFromDB,
+        currentUser: userResponseFromDB,
+    }
+    res.status(200).json(combinedResponse);
 })
 
 router.use(require("./Login.routes"));

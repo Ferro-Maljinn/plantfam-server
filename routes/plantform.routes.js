@@ -1,17 +1,21 @@
 const router = require("express").Router();
 const PlantModel = require("../models/Plant.model");
 const { requireLogin } = require("../middleware/authentication.js");
+const User = require("../models/User.model");
 
 /* GET plantform page */
 router.get("/plantform", requireLogin, (req, res, next) => {
-  console.log(req.session, "session from plantform")
+  console.log(req.session, "session from plantform");
   res.json({ message: "hello from plantform get" });
 });
 
 /* POST plantform page */
 router.post("/plantform", async (req, res, next) => {
-
-  console.log(req.body, "this is req body")
+  console.log(req.session, "this is req session");
+  const currentUser = await User.findOne({
+    email: req.session.currentUser._id,
+  });
+  console.log(currentUser, "currentuser");
   try {
     const {
       image,
@@ -24,7 +28,6 @@ router.post("/plantform", async (req, res, next) => {
       soilType,
     } = req.body;
 
-
     const plant = {
       image: image,
       description: description,
@@ -34,21 +37,13 @@ router.post("/plantform", async (req, res, next) => {
       light: light,
       watering: watering,
       soilType: soilType,
+      owner: req.session.currentUser._id,
     };
 
-    await PlantModel.create(plant);
-    
-    res.json({
-      plant: {
-        image,
-        description,
-        englishName,
-        latinName,
-        height,
-        light,
-        watering,
-        soilType,
-      },
+    let plantid = await PlantModel.create(plant);
+
+    res.status(200).json({
+      plant,
       message: "successfully created plant!",
     });
   } catch (err) {
