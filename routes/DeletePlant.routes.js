@@ -2,7 +2,6 @@ const router = require("express").Router();
 const Plant = require("../models/Plant.model");
 
 router.delete("/deleteplant/:id", async (req, res, next) => {
-  // console.log("here is the body", req.body);
 
   try {
     const { id } = req.params;
