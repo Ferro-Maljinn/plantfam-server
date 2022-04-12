@@ -2,9 +2,10 @@ const router = require("express").Router();
 let Comment = require("../models/Comment.model");
 
 // ---------------------------------------------- GET COMMENT
-router.get("/comment/:commentId", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const comment = await Comment.findById(req.params.commentId);
+    const { id } = req.params;
+    const comment = await Comment.findById(id);
     if (!comment) return res.status(404).send("Comment not found");
     return res.json(comment);
   } catch (e) {
@@ -13,7 +14,7 @@ router.get("/comment/:commentId", async (req, res) => {
 });
 
 // ---------------------------------------------- CREATE COMMENT
-router.post("/comment/create", async (req, res) => {
+router.post("/create", async (req, res) => {
   try {
     const { comment, plantId, owner } = req.body;
 
@@ -29,7 +30,7 @@ router.post("/comment/create", async (req, res) => {
 });
 
 // ---------------------------------------------- UPDATE COMMENT
-router.put("/comment/update/:id", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { comment } = req.body;
@@ -45,7 +46,7 @@ router.put("/comment/update/:id", async (req, res) => {
 });
 
 // ---------------------------------------------- DELETE COMMENT
-router.delete("/comment/delete/:id", async (req, res, next) => {
+router.delete("/delete/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedComment = await Comment.findByIdAndDelete(id);
