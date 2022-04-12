@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Plant = require("../models/Plant.model");
 const PlantModel = require("../models/Plant.model")
-const UserModel = require("../models/User.model")
+// const UserModel = require("../models/User.model")
 
 /* GET index page */
 router.get('/', async function(req, res) {
