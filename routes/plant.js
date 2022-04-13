@@ -12,6 +12,18 @@ router.get("/all", async (req, res) => {
     }
 });
 
+// ---------------------------------------------- GET single plant  
+router.get("/plantdetails/:plantId", async (req, res) => {
+    const plantId = req.params.plantId
+    try {
+        const singlePlant = await PlantModel.findById(plantId);
+        res.status(200).json(singlePlant);
+    } catch (e) {
+        console.error(e, "error from allplant route")
+        res.status(400).send(e.message);
+    }
+});
+
 // ---------------------------------------------- GET PLANT BY ID
 router.get("/:id", async (req, res) => {
     try {
@@ -79,7 +91,8 @@ router.put("/update/:id", async (req, res) => {
             { new: true }
         );
         if (!currentPlant) return res.status(404).send("Plant not found");
-        return res.json(currentPlant);
+        const updatedPlants = await PlantModel.find();
+        return res.json(updatedPlants);
     } catch (err) {
         return res.status(400).send(err.message);
     }
