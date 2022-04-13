@@ -18,20 +18,20 @@ const userSchema = new Schema(
       match: [/^\S+@\S+\.\S+$/, "Please provide a valid email address."],
       lowercase: true,
     },
-    location:{
+    location: {
       country: {
         type: String,
-        required: [true, "country is required."],
+        // required: [true, "country is required."],
       },
       city: {
         type: String,
-        required: [true, "city is required."],
+        // required: [true, "city is required."],
       },
       zipCode: {
         type: String,
-      }
+      },
     },
-    plants: [ {type: Schema.Types.ObjectId, ref: 'Plant'} ],
+    plants: [{ type: Schema.Types.ObjectId, ref: "Plant" }],
   },
   {
     timestamps: true,
