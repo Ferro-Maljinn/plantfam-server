@@ -9,7 +9,7 @@ router.get("/:id", async (req, res) => {
     if (!comment) return res.status(404).send("Comment not found");
     return res.json(comment);
   } catch (e) {
-    return res.status(500).send(e.message);
+    return res.status(400).send(e.message);
   }
 });
 
@@ -25,7 +25,7 @@ router.post("/create", async (req, res) => {
     });
     return res.json(createdComment);
   } catch (err) {
-    return res.status(500).send(err.message);
+    return res.status(400).send(err.message);
   }
 });
 
@@ -41,7 +41,7 @@ router.put("/update/:id", async (req, res) => {
     );
     return res.json(currentComment);
   } catch (err) {
-    return res.status(500).send(err.message);
+    return res.status(400).send(err.message);
   }
 });
 
@@ -52,7 +52,7 @@ router.delete("/delete/:id", async (req, res, next) => {
     const deletedComment = await Comment.findByIdAndDelete(id);
     return res.json(deletedComment);
   } catch (err) {
-    return res.status(500).send(err.message);
+    return res.status(400).send(err.message);
   }
 });
 
