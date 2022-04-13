@@ -23,7 +23,9 @@ router.post("/create", async (req, res) => {
       plantId,
       owner,
     });
-    return res.json(createdComment);
+    const allComments = await Comment.find()
+    console.log(allComments, "all the comments from db")
+    return res.json(allComments);
   } catch (err) {
     return res.status(400).send(err.message);
   }
