@@ -10,12 +10,11 @@ router.get("/profilepage", requireLogin, (req, res, next) => {
 // ---------------------------------------------- GET ME DATA BY SESSION
 router.get("/me", async (req, res) => {
   try {
-    // TODO NOT WORKING - WHY??
-    // let me = await UserModel.findOne({_id: req.session.currentUser._id})
-    // if (!me) return res.status(404).send("User not found");
+    let me = await UserModel.findOne({_id: req.session.currentUser._id})
+    if (!me) return res.status(404).send("User not found");
     return res.json(req.session);
   } catch (e) {
-    return res.status(500).json(e.message);
+    return res.status(400).json(e.message);
   }
 });
 
@@ -26,7 +25,7 @@ router.get("/:id", async (req, res) => {
     if (!user) return res.status(404).send("User not found");
     return res.json(user);
   } catch (e) {
-    return res.status(500).send(e.message);
+    return res.status(400).send(e.message);
   }
 });
 

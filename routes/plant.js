@@ -7,7 +7,8 @@ router.get("/all", async (req, res) => {
         const allPlants = await PlantModel.find({});
         res.status(200).json(allPlants);
     } catch (e) {
-        res.status(500).send(e.message);
+        console.error(e, "error from allplant route")
+        res.status(400).send(e.message);
     }
 });
 
@@ -19,7 +20,8 @@ router.get("/:id", async (req, res) => {
         if (!plant) return res.status(404).send("Plant not found");
         return res.json(plant);
     } catch (e) {
-        return res.status(500).send(e.message);
+        console.error(e, "error from plantId route")
+        return res.status(400).send(e.message);
     }
 });
 
@@ -50,7 +52,8 @@ router.post("/create", async (req, res) => {
 
         return res.json(createdPlant);
     } catch (err) {
-        return res.status(500).send(err.message);
+        console.error(e, "error from create plant route")
+        return res.status(400).send(err.message);
     }
 });
 
@@ -78,7 +81,7 @@ router.put("/update/:id", async (req, res) => {
         if (!currentPlant) return res.status(404).send("Plant not found");
         return res.json(currentPlant);
     } catch (err) {
-        return res.status(500).send(err.message);
+        return res.status(400).send(err.message);
     }
 });
 
@@ -88,9 +91,10 @@ router.delete("/delete/:id", async (req, res, next) => {
         const { id } = req.params;
         const deletedPlant = await PlantModel.findByIdAndDelete(id);
         if (!deletedPlant) return res.status(404).send("Plant not found");
-        return res.json(deletedPlant);
+        const notDeletedPlants = await PlantModel.find()
+        return res.json(notDeletedPlants);
     } catch (err) {
-        return res.status(500).send(err.message);
+        return res.status(400).send(err.message);
     }
 });
 
