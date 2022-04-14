@@ -29,7 +29,7 @@ router.get("/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const plant = await PlantModel.findById(id);
-        if (!plant) return res.status(404).send("Plant not found");
+        if (!plant) return res.status(400).send("Plant not found");
         return res.json(plant);
     } catch (e) {
         console.error(e, "error from plantId route")
@@ -90,7 +90,7 @@ router.put("/update/:id", async (req, res) => {
             },
             { new: true }
         );
-        if (!currentPlant) return res.status(404).send("Plant not found");
+        if (!currentPlant) return res.status(400).send("Plant not found");
         const updatedPlants = await PlantModel.find();
         return res.json(updatedPlants);
     } catch (err) {
@@ -103,7 +103,7 @@ router.delete("/delete/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
         const deletedPlant = await PlantModel.findByIdAndDelete(id);
-        if (!deletedPlant) return res.status(404).send("Plant not found");
+        if (!deletedPlant) return res.status(400).send("Plant not found");
         const notDeletedPlants = await PlantModel.find()
         return res.json(notDeletedPlants);
     } catch (err) {

@@ -11,7 +11,7 @@ router.get("/profilepage", requireLogin, (req, res, next) => {
 router.get("/me", async (req, res) => {
   try {
     let me = await UserModel.findOne({_id: req.session.currentUser._id})
-    if (!me) return res.status(404).send("User not found");
+    if (!me) return res.status(400).send("User not found");
     return res.json(req.session);
   } catch (e) {
     return res.status(400).json(e.message);
@@ -22,7 +22,7 @@ router.get("/me", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     let user = await UserModel.findOne(id);
-    if (!user) return res.status(404).send("User not found");
+    if (!user) return res.status(400).send("User not found");
     return res.json(user);
   } catch (e) {
     return res.status(400).send(e.message);

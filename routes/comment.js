@@ -6,7 +6,7 @@ router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const comment = await Comment.findById(id);
-    if (!comment) return res.status(404).send("Comment not found");
+    if (!comment) return res.status(400).send("Comment not found");
     return res.json(comment);
   } catch (e) {
     return res.status(400).send(e.message);
