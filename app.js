@@ -1,7 +1,7 @@
 // ℹ️ Gets access to environment variables/settings
 // https://www.npmjs.com/package/dotenv
 require("dotenv/config");
-const cors = require('cors');
+
 
 // ℹ️ Connects to the database
 require("./db");
@@ -21,7 +21,7 @@ require("./config")(app);
 // default value for title local
 const capitalized = require("./utils/capitalized");
 const projectName = "server-app";
-app.use(cors({credentials: false, origin: 'http://localhost:3000'}));
+
 
 app.locals.appTitle = `${capitalized(projectName)} created with IronLauncher`;
 

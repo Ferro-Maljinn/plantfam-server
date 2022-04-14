@@ -31,6 +31,13 @@ module.exports = (app) => {
   app.set("trust proxy", 1);
 
   app.use(
+    cors({
+      credentials: true,
+      origin: process.env.ORIGIN || "http://localhost:3000",
+    })
+  );
+
+  app.use(
     session({
       secret: process.env.SESSION_SECRET,
       resave: false,
@@ -48,14 +55,7 @@ module.exports = (app) => {
     })
   );
 
- 
 
-  app.use(
-    cors({
-      credentials: true,
-      origin: process.env.ORIGIN || "http://localhost:3000",
-    })
-  );
 
   // In development environment the app logs
   app.use(logger("dev"));
