@@ -29,7 +29,7 @@ console.log(process.env)
 // Middleware configuration
 module.exports = (app) => {
   app.set("trust proxy", 1);
-
+console.log("hi hi ricolo", process.env.ORIGIN);
   app.use(
     cors({
       credentials: true,
