@@ -23,8 +23,6 @@ const favicon = require("serve-favicon");
 const path = require("path");
 const { MONGO_URI } = require("../utils/constants");
 
-require("dotenv").config();
-console.log(process.env)
 
 // Middleware configuration
 module.exports = (app) => {
