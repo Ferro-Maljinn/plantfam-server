@@ -22,4 +22,8 @@
     "multer-storage-cloudinary": "^4.0.0",
     "serve-favicon": "^2.5.0"
   }
+  "engines": {
+  "node": "12.x"
+}
+
 }
