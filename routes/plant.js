@@ -49,6 +49,7 @@ router.post("/create", async (req, res) => {
             light,
             watering,
             soilType,
+            owner,
         } = req.body;
 
         const createdPlant = await PlantModel.create({
@@ -60,11 +61,12 @@ router.post("/create", async (req, res) => {
             light,
             watering,
             soilType,
+            owner,
         });
 
         return res.json(createdPlant);
     } catch (err) {
-        console.error(e, "error from create plant route")
+        console.error(err, "error from create plant route")
         return res.status(400).send(err.message);
     }
 });
