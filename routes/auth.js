@@ -16,7 +16,6 @@ router.post("/login", async (req, res, next) => {
       throw Error("Password incorrect");
     }
     req.session.currentUser = { _id: user._id, name: user.name };
-    console.log(req.session, "session");
     // TODO return also session cookie
     return res.json({
       user: req.session.currentUser,
@@ -37,7 +36,6 @@ router.post("/logout", (req, res) => {
 });
 
 router.post("/signup", async (req, res, next) => {
-  console.log(req.session, "session");
   try {
     const { name, email, password } = req.body;
     const salt = await bcrypt.genSalt(12);
@@ -50,7 +48,7 @@ router.post("/signup", async (req, res, next) => {
     };
 
     const createdUser = await UserModel.create(user);
-    req.session.currentUser = { name, email };
+    req.session.currentUser = { _id: createdUser._id, name: createdUser.name };
     res.json({ user: { name, email }, message: "successfully sent user" });
   } catch (err) {
     console.log(err, "error from signup");
