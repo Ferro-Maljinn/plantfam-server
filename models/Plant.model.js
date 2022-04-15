@@ -4,7 +4,7 @@ const plantSchema = new Schema({
   image: {
     type: String,
     imageUrl: String,
-  },
+  }, 
   description: {
     type: String,
   },

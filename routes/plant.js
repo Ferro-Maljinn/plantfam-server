@@ -78,7 +78,7 @@ router.put("/update/:id", async (req, res) => {
         const { image, description, englishName, latinName, height,
                 light, watering, soilType } = req.body;
                 
-        const currentPlant = await PlantModel.findOneAndUpdate(
+        const currentPlant = await PlantModel.findByIdAndUpdate(
             id,
             {
                 image: image,
@@ -89,6 +89,7 @@ router.put("/update/:id", async (req, res) => {
                 light: light,
                 watering: watering,
                 soilType: soilType,
+                // owner: req.session.cur
             },
             { new: true }
         );
